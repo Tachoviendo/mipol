@@ -1,5 +1,3 @@
-"use client";
-
 import { AnuncioCard } from "@/components/AnuncioCard";
 import { anuncios } from "@/data/ejemplo";
 import { DestinatarioSelector } from "@/components/DestinatarioSelector";
