@@ -99,6 +99,32 @@ export function LineaDetalle({ linea }: { linea: Linea }) {
           ))}
         </div>
       </section>
+
+      {linea.contacto && (
+        <section className="flex flex-col gap-4">
+          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+            Contacto del operador
+          </h2>
+          <div className="rounded-xl border border-black/[.08] dark:border-white/[.145] bg-white dark:bg-zinc-900 p-4 flex flex-col gap-2">
+            <p className="font-medium text-black dark:text-zinc-50">
+              {linea.contacto.empresa}
+            </p>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              Teléfono: {linea.contacto.telefono}
+            </p>
+            {linea.contacto.email && (
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                Email: {linea.contacto.email}
+              </p>
+            )}
+            {linea.contacto.horarioAtencion && (
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                Horario: {linea.contacto.horarioAtencion}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
