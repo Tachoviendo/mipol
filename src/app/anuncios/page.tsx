@@ -1,5 +1,3 @@
-"use client";
-
 import { AnuncioCard } from "@/components/AnuncioCard";
 import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
 import { AdminLogin } from "@/components/AdminLogin";
