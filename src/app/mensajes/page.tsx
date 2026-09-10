@@ -1,30 +1,14 @@
-"use client";
+import { ConversationList } from "@/components/ConversationList";
+import { conversaciones } from "@/data/ejemplo";
 
-import { useState } from "react";
-import Link from "next/link";
-import { useMensajeria } from "@/lib/mensajeria-context";
-import type { Conversacion, Mensaje } from "@/data/mensajeria";
-import { conversacionesMock, mensajesMock } from "@/data/mensajeria";
-import { formatearFecha } from "@/lib/date";
+export const metadata = {
+  title: "Mensajes",
+  description: "Tus conversaciones ordenadas por actividad reciente",
+};
 
 export default function MensajesPage() {
-  const { conversaciones, totalNoLeidos, marcarComoLeida } = useMensajeria();
-  const [conversacionSeleccionada, setConversacionSeleccionada] = useState<Conversacion | null>(null);
-
-  const mensajesDeConversacion = (conversacionId: string): Mensaje[] => {
-    return mensajesMock
-      .filter((m) => m.conversacionId === conversacionId)
-      .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
-  };
-
-  const handleMarcarLeida = (conversacionId: string) => {
-    marcarComoLeida(conversacionId);
-    if (conversacionSeleccionada?.id === conversacionId) {
-      setConversacionSeleccionada(conversaciones.find((c) => c.id === conversacionId) || null);
-    }
-  };
-
   return (
+ 22-f-09-paleta-y-look-feel-spike
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-black">
       <div className="mx-auto flex w-full max-w-7xl flex-1 px-4 py-6">
         <div className="flex w-full gap-6">
@@ -186,6 +170,19 @@ export default function MensajesPage() {
           </section>
         </div>
       </div>
+
+    <div className="flex flex-col flex-1 w-full max-w-3xl mx-auto px-4 py-8">
+      <header className="mb-6">
+        <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
+          Mensajes
+        </h1>
+        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          Tus conversaciones ordenadas por actividad reciente
+        </p>
+      </header>
+
+      <ConversationList conversaciones={conversaciones} />
+ main
     </div>
   );
 }

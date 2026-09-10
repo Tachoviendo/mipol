@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/lib/auth";
 import { MensajeriaProvider } from "@/lib/mensajeria-context";
+import { AuthProvider } from "@/lib/auth";
 import { Topbar } from "@/components/Topbar";
 import "./globals.css";
 
@@ -17,9 +18,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+ 22-f-09-paleta-y-look-feel-spike
   title: "MiPol",
   description:
     "Plataforma del Liceo 1° de Salto: transporte, mensajería, calendario y foros.",
+
+  title: "Liceo 1° de Salto - MiPol",
+  description: "Plataforma del Liceo 1° de Salto.",
+ main
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
