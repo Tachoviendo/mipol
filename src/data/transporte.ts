@@ -34,6 +34,13 @@ export type DiaCirculacion = {
   activo: boolean;
 };
 
+export type ContactoTransporte = {
+  empresa: string;
+  telefono: string;
+  email?: string;
+  horarioAtencion?: string;
+};
+
 export type Linea = {
   id: string;
   nombre: string;
@@ -42,6 +49,7 @@ export type Linea = {
   paradas: Parada[];
   horarios: Horario[];
   diasCirculacion: DiaCirculacion[];
+  contacto?: ContactoTransporte;
 };
 
 // ─── Datos mock ──────────────────────────────────────────────────────────────
@@ -429,6 +437,12 @@ export const lineas: Linea[] = [
       diasCirculacion[4],
       diasCirculacion[5],
     ],
+    contacto: {
+      empresa: "Transportes Salto S.A.",
+      telefono: "099 456 789",
+      email: "info@transsalto.com.uy",
+      horarioAtencion: "Lunes a sábado 06:00 - 22:00",
+    },
   },
   {
     id: "l2",
@@ -457,6 +471,11 @@ export const lineas: Linea[] = [
       diasCirculacion[4],
       diasCirculacion[5],
     ],
+    contacto: {
+      empresa: "Transportes Salto S.A.",
+      telefono: "099 456 789",
+      horarioAtencion: "Lunes a sábado 06:00 - 22:00",
+    },
   },
   {
     id: "l3",
@@ -501,5 +520,10 @@ export const lineas: Linea[] = [
       diasCirculacion[5],
       diasCirculacion[6],
     ],
+    contacto: {
+      empresa: "Transportes Salto S.A.",
+      telefono: "099 456 789",
+      email: "info@transsalto.com.uy",
+    },
   },
 ];
