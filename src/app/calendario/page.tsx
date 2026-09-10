@@ -5,6 +5,7 @@ import { CalendarioGrilla } from "@/components/CalendarioGrilla";
 import { DetalleEventoModal } from "@/components/DetalleEventoModal";
 import { FiltrosCalendario } from "@/components/FiltrosCalendario";
 import { FormularioEvento } from "@/components/FormularioEvento";
+import { LeyendaCalendario } from "@/components/LeyendaCalendario";
 import { type EventoCalendario, type TipoEvento } from "@/data/eventos";
 
 export default function CalendarioPage() {
@@ -49,6 +50,8 @@ export default function CalendarioPage() {
           filtros={filtros}
           onEventoClick={setEventoSeleccionado}
         />
+
+        <LeyendaCalendario />
 
         {eventoSeleccionado && (
           <DetalleEventoModal
