@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MiPol - Transporte",
-  description: "Sistema de información de transporte urbano",
+  title: "Liceo 1° de Salto - MiPol",
+  description: "Plataforma del Liceo 1° de Salto.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

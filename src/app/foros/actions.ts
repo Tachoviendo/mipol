@@ -52,6 +52,7 @@ export async function establecerRolAction(formData: FormData) {
   }
 
   revalidatePath("/foros", "layout");
+  revalidatePath("/", "layout");
 }
 
 export async function crearHiloAction(formData: FormData) {
