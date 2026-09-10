@@ -10,9 +10,6 @@ import { novedadesTransporte } from "@/data/novedades";
 import { formatearFecha } from "@/lib/date";
 import Link from "next/link";
 import { lineas } from "@/data/transporte";
-import { DestinatarioSelector } from "@/components/DestinatarioSelector";
-import type { DestinatarioSeleccionado } from "@/data/destinatarios";
-import { useState } from "react";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
@@ -59,7 +56,7 @@ export default function AnunciosPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-primary-light px-6 py-16 dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-zinc-50 px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">

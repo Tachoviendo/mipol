@@ -22,6 +22,9 @@ export function Topbar() {
             <Link href="/anuncios" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
               Anuncios
             </Link>
+            <Link href="/calendario" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Calendario
+            </Link>
           </div>
         </div>
 
