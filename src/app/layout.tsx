@@ -1,5 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Geist, Geist_Mono } from "next/font/google";
+import { AuthProvider } from "@/lib/auth";
+import { MensajeriaProvider } from "@/lib/mensajeria-context";
+import { AuthProvider } from "@/lib/auth";
+import { Topbar } from "@/components/Topbar";
 import "./globals.css";
 import { Topbar } from "@/components/Topbar";
 import { MensajesProvider } from "@/contexts/MensajesContext";

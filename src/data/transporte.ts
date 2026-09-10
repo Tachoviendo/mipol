@@ -9,6 +9,7 @@ export type Parada = {
   id: string;
   nombre: string;
   direccion: string;
+  zona: string;
   latitud: number;
   longitud: number;
   orden: number;
@@ -33,6 +34,13 @@ export type DiaCirculacion = {
   activo: boolean;
 };
 
+export type ContactoTransporte = {
+  empresa: string;
+  telefono: string;
+  email?: string;
+  horarioAtencion?: string;
+};
+
 export type Linea = {
   id: string;
   nombre: string;
@@ -41,6 +49,7 @@ export type Linea = {
   paradas: Parada[];
   horarios: Horario[];
   diasCirculacion: DiaCirculacion[];
+  contacto?: ContactoTransporte;
 };
 
 // ─── Datos mock ──────────────────────────────────────────────────────────────
@@ -50,6 +59,7 @@ export const paradas: Parada[] = [
     id: "p1",
     nombre: "Terminal Salto",
     direccion: "Av. 19 de Abril esq. Gral. Artigas",
+    zona: "Terminal",
     latitud: -31.3833,
     longitud: -57.9667,
     orden: 1,
@@ -58,6 +68,7 @@ export const paradas: Parada[] = [
     id: "p2",
     nombre: "Plaza Libertad",
     direccion: "Plaza Libertad, centro",
+    zona: "Centro",
     latitud: -31.385,
     longitud: -57.965,
     orden: 2,
@@ -66,6 +77,7 @@ export const paradas: Parada[] = [
     id: "p3",
     nombre: "Hospital Departamental",
     direccion: "Av. Varela esq.engel",
+    zona: "Centro",
     latitud: -31.387,
     longitud: -57.962,
     orden: 3,
@@ -74,6 +86,7 @@ export const paradas: Parada[] = [
     id: "p4",
     nombre: "Liceo 1° de Salto",
     direccion: "Cno. Miguelete s/n",
+    zona: "Liceo",
     latitud: -31.389,
     longitud: -57.958,
     orden: 4,
@@ -82,6 +95,7 @@ export const paradas: Parada[] = [
     id: "p5",
     nombre: "Barrio Obrero",
     direccion: "Cno. Barrio Obrero",
+    zona: "Barrio Obrero",
     latitud: -31.392,
     longitud: -57.955,
     orden: 5,
@@ -90,6 +104,7 @@ export const paradas: Parada[] = [
     id: "p6",
     nombre: "Estadio Atilio Paiva Olivera",
     direccion: "Parque Harriague",
+    zona: "Parque Harriague",
     latitud: -31.395,
     longitud: -57.952,
     orden: 6,
@@ -98,6 +113,7 @@ export const paradas: Parada[] = [
     id: "p7",
     nombre: "Parada Av. España",
     direccion: "Av. de España esq. 18 de Julio",
+    zona: "Centro",
     latitud: -31.388,
     longitud: -57.963,
     orden: 7,
@@ -106,6 +122,7 @@ export const paradas: Parada[] = [
     id: "p8",
     nombre: "Complejo Juvenil",
     direccion: "Cno. Complejo Juvenil",
+    zona: "Liceo",
     latitud: -31.391,
     longitud: -57.96,
     orden: 8,
@@ -420,6 +437,12 @@ export const lineas: Linea[] = [
       diasCirculacion[4],
       diasCirculacion[5],
     ],
+    contacto: {
+      empresa: "Transportes Salto S.A.",
+      telefono: "099 456 789",
+      email: "info@transsalto.com.uy",
+      horarioAtencion: "Lunes a sábado 06:00 - 22:00",
+    },
   },
   {
     id: "l2",
@@ -448,6 +471,11 @@ export const lineas: Linea[] = [
       diasCirculacion[4],
       diasCirculacion[5],
     ],
+    contacto: {
+      empresa: "Transportes Salto S.A.",
+      telefono: "099 456 789",
+      horarioAtencion: "Lunes a sábado 06:00 - 22:00",
+    },
   },
   {
     id: "l3",
@@ -492,5 +520,10 @@ export const lineas: Linea[] = [
       diasCirculacion[5],
       diasCirculacion[6],
     ],
+    contacto: {
+      empresa: "Transportes Salto S.A.",
+      telefono: "099 456 789",
+      email: "info@transsalto.com.uy",
+    },
   },
 ];
