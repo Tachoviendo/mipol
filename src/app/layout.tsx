@@ -18,8 +18,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+ 3-f-02-configuración-de-tailwind
+  title: "Liceo 1° de Salto",
+  description: "Plataforma del Liceo 1° de Salto.",
+
   title: "MiPol - Transporte",
   description: "Sistema de información de transporte urbano",
+ main
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
