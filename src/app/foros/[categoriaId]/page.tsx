@@ -48,7 +48,7 @@ export default async function CategoriaPage({
   return (
     <div className="min-h-screen bg-zinc-50 px-6 py-12 text-zinc-950 sm:px-10 sm:py-16">
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        <Link href="/foros" className="text-sm font-semibold text-emerald-800">
+        <Link href="/foros" className="text-sm font-semibold text-brand-700">
           Volver a categorías
         </Link>
 
@@ -67,7 +67,7 @@ export default async function CategoriaPage({
 
         <header className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">
               Categoría
             </p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight">{categoria.nombre}</h1>
@@ -78,7 +78,7 @@ export default async function CategoriaPage({
           {puedeCrearHilo && (
             <Link
               href={`/foros/${categoria.id}/nuevo`}
-              className="rounded-lg bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white"
+              className="rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white"
             >
               Nuevo hilo
             </Link>
@@ -96,7 +96,7 @@ export default async function CategoriaPage({
                 href={`/foros/${categoria.id}?orden=actividad`}
                 className={
                   orden !== "respuestas"
-                    ? "rounded-md bg-white px-3 py-1.5 font-semibold text-emerald-900 shadow-sm"
+                    ? "rounded-md bg-white px-3 py-1.5 font-semibold text-brand-900 shadow-sm"
                     : "rounded-md px-3 py-1.5 text-zinc-600 hover:text-zinc-900"
                 }
               >
@@ -106,7 +106,7 @@ export default async function CategoriaPage({
                 href={`/foros/${categoria.id}?orden=respuestas`}
                 className={
                   orden === "respuestas"
-                    ? "rounded-md bg-white px-3 py-1.5 font-semibold text-emerald-900 shadow-sm"
+                    ? "rounded-md bg-white px-3 py-1.5 font-semibold text-brand-900 shadow-sm"
                     : "rounded-md px-3 py-1.5 text-zinc-600 hover:text-zinc-900"
                 }
               >

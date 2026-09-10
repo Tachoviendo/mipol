@@ -51,9 +51,11 @@ El tema institucional del liceo (colores, tipografías y breakpoints) se define
 
 Para ajustarlo, editar ahí:
 
-- **Colores institucionales**: tokens `--color-primary*`, `--color-secondary*`
-  y `--color-accent`. Tienen una paleta tentativa (azul oscuro + celeste) que
-  debe reemplazarse por los códigos hex oficiales.
+- **Colores institucionales**: tokens `--color-brand*`, `--color-teal*` y los
+  alias semánticos `--color-primary*`, `--color-secondary*` y `--color-accent`.
+  La paleta fue aprobada por el equipo — ver
+  [`docs/identidad-visual.md`](docs/identidad-visual.md) para la referencia
+  institucional y la guía de uso.
 - **Tipografías**: `--font-sans` y `--font-mono`, enlazadas a las fuentes
   Geist cargadas en `src/app/layout.tsx`.
 - **Breakpoints**: se usa la escala por defecto de Tailwind
