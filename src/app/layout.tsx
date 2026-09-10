@@ -1,6 +1,14 @@
+"use client";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+ 16-f-03-layout-base-sidebar-topbar-responsive
 import { Shell } from "@/components/Shell";
+
+import { AuthProvider } from "@/lib/auth";
+import { MensajeriaProvider } from "@/lib/mensajeria-context";
+import { Topbar } from "@/components/Topbar";
+ main
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,18 +22,48 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+ 16-f-03-layout-base-sidebar-topbar-responsive
   title: "MiPol",
   description: "Plataforma colaborativa del Liceo 1 de Salto",
+
+ 3-f-02-configuración-de-tailwind
+  title: "Liceo 1° de Salto",
+  description: "Plataforma del Liceo 1° de Salto.",
+
+  title: "MiPol - Transporte",
+  description: "Sistema de información de transporte urbano",
+ main
+ main
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
+ 16-f-03-layout-base-sidebar-topbar-responsive
       lang="es-UY"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="h-full">
         <Shell>{children}</Shell>
+
+      lang="es"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <AuthProvider>{children}</AuthProvider>
+  title: "MiPol",
+  description: "Sistema de transporte y mensajería",
+};
+
+export default function RootLayout({ children }: React.PropsWithChildren) {
+  return (
+    <html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">
+        <MensajeriaProvider>
+          <Topbar />
+          <main className="flex-1">{children}</main>
+        </MensajeriaProvider>
+ main
       </body>
     </html>
   );
