@@ -44,7 +44,7 @@ export default function MensajesPage() {
                   onClick={() => setConversacionSeleccionada(conv)}
                   className={`flex items-start gap-3 rounded-lg p-3 text-left transition-colors ${
                     conv.noLeidos > 0
-                      ? "bg-blue-50 dark:bg-blue-900/20"
+                      ? "bg-brand-50 dark:bg-brand-900/20"
                       : "hover:bg-zinc-100 dark:hover:bg-zinc-800"
                   }`}
                 >
@@ -147,7 +147,7 @@ export default function MensajesPage() {
                           <div
                             className={`inline-block rounded-2xl px-4 py-2 text-sm ${
                               esPropio
-                                ? "bg-blue-600 text-white rounded-tr-sm"
+                                ? "bg-brand-600 text-white rounded-tr-sm"
                                 : "bg-white dark:bg-zinc-800 rounded-tl-sm border border-black/[.08] dark:border-white/[.145]"
                             }`}
                           >
@@ -171,7 +171,7 @@ export default function MensajesPage() {
                     />
                     <button
                       type="submit"
-                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                      className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
                     >
                       Enviar
                     </button>

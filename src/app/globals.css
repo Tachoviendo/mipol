@@ -11,8 +11,8 @@
 
   Colores institucionales
   -----------------------
-  Paleta tentativa del Liceo (azul oscuro + celeste). Reemplazar los
-  valores hex por los códigos oficiales cuando estén disponibles.
+  Paleta aprobada del Liceo (índigo + teal), derivada de las imágenes de
+  referencia en `docs/`. Ver `docs/identidad-visual.md`.
 
   Tipografías
   -----------
@@ -36,14 +36,34 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  /* Azul institucional (índigo) — ver docs/identidad-visual.md */
+  --color-brand-50: #f1f1fe;
+  --color-brand-100: #e5e3fd;
+  --color-brand-200: #cfc9fb;
+  --color-brand-300: #aca4f6;
+  --color-brand-400: #8a78f0;
+  --color-brand-500: #5656f0;
+  --color-brand-600: #4740d6;
+  --color-brand-700: #3a36a8;
+  --color-brand-800: #323297;
+  --color-brand-900: #26266e;
+  --color-brand-950: #1a1a4a;
+
+  /* Acento teal */
+  --color-teal-50: #eef8f8;
+  --color-teal-100: #d6f0f0;
+  --color-teal-500: #20a0a0;
+  --color-teal-600: #1b8686;
+  --color-teal-700: #146b6b;
+
   /* Tokens de color institucional del Liceo */
-  --color-primary: #0f4c81;
-  --color-primary-dark: #0a355c;
-  --color-primary-light: #e8f1f9;
-  --color-secondary: #2ca6e0;
-  --color-secondary-dark: #1b7fb0;
-  --color-secondary-light: #e6f6fd;
-  --color-accent: #f5a623;
+  --color-primary: #5656f0;
+  --color-primary-dark: #323297;
+  --color-primary-light: #f1f1fe;
+  --color-secondary: #20a0a0;
+  --color-secondary-dark: #146b6b;
+  --color-secondary-light: #d6f0f0;
+  --color-accent: #20a0a0;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

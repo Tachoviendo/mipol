@@ -16,7 +16,7 @@ export function MensajeItem({
     <article
       className={
         mensaje.esInicial
-          ? "border-l-4 border-emerald-600 bg-emerald-50 p-6"
+          ? "border-l-4 border-teal-500 bg-teal-50 p-6"
           : "border-t border-zinc-200 py-6"
       }
     >

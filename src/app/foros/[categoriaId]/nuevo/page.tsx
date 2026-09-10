@@ -34,7 +34,7 @@ export default async function NuevoHiloPage({ params }: NuevoHiloPageProps) {
   return (
     <div className="min-h-screen bg-zinc-50 px-6 py-12 text-zinc-950 sm:px-10 sm:py-16">
       <main className="mx-auto flex w-full max-w-2xl flex-col gap-8">
-        <Link href={`/foros/${categoria.id}`} className="text-sm font-semibold text-emerald-800">
+        <Link href={`/foros/${categoria.id}`} className="text-sm font-semibold text-brand-700">
           Volver a {categoria.nombre}
         </Link>
         <header>
@@ -81,7 +81,7 @@ export default async function NuevoHiloPage({ params }: NuevoHiloPageProps) {
           </label>
           <button
             type="submit"
-            className="self-start rounded-lg bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-white"
+            className="self-start rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white"
           >
             Publicar hilo
           </button>
