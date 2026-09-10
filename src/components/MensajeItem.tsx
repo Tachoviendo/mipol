@@ -1,52 +1,45 @@
-import { eliminarMensajeAction } from "@/app/foros/actions";
-import { ConfirmSubmitButton } from "@/components/ConfirmSubmitButton";
-import type { MensajeForo as MensajeForoData } from "@/data/foros";
-import { formatearFecha } from "@/lib/date";
+import { formatearFecha, formatearHora } from "@/lib/date";
+import type { Mensaje, Usuario } from "@/data/mensajes";
 
+/**
+ * `src/components/MensajeItem.tsx`: muestra un mensaje individual
+ * con autor, contenido, fecha y hora.
+ */
 export function MensajeItem({
   mensaje,
-  categoriaId,
-  puedeEliminar = false,
+  autor,
+  esPropio,
 }: {
-  mensaje: MensajeForoData;
-  categoriaId: string;
-  puedeEliminar?: boolean;
+  mensaje: Mensaje;
+  autor: Usuario;
+  esPropio: boolean;
 }) {
   return (
-    <article
-      className={
-        mensaje.esInicial
-          ? "border-l-4 border-emerald-600 bg-emerald-50 p-6"
-          : "border-t border-zinc-200 py-6"
-      }
+    <div
+      className={`flex flex-col gap-1 ${
+        esPropio ? "items-end" : "items-start"
+      }`}
     >
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="font-semibold text-zinc-950">{mensaje.autor}</p>
-        <time dateTime={mensaje.fecha} className="text-sm text-zinc-500">
-          {formatearFecha(mensaje.fecha)}
+      <div className="flex items-center gap-2 text-xs text-zinc-500">
+        <span className="font-medium text-zinc-700 dark:text-zinc-300">
+          {autor.nombre}
+        </span>
+        <span className="rounded-full bg-zinc-200 px-2 py-0.5 text-[10px] uppercase text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400">
+          {autor.rol}
+        </span>
+        <time dateTime={mensaje.fecha} className="text-zinc-400">
+          {formatearFecha(mensaje.fecha)} {formatearHora(mensaje.fecha)}
         </time>
       </div>
-      <p className="mt-3 whitespace-pre-line text-base leading-7 text-zinc-700">
+      <div
+        className={`max-w-[80%] rounded-lg px-4 py-2 text-sm ${
+          esPropio
+            ? "bg-blue-600 text-white dark:bg-blue-500"
+            : "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50"
+        }`}
+      >
         {mensaje.contenido}
-      </p>
-      {puedeEliminar && mensaje.esInicial && (
-        <p className="mt-3 text-xs text-zinc-400">
-          Para eliminar el mensaje inicial, eliminá el hilo completo.
-        </p>
-      )}
-      {puedeEliminar && !mensaje.esInicial && (
-        <form action={eliminarMensajeAction} className="mt-3">
-          <input type="hidden" name="categoriaId" value={categoriaId} />
-          <input type="hidden" name="hiloId" value={mensaje.hiloId} />
-          <input type="hidden" name="mensajeId" value={mensaje.id} />
-          <ConfirmSubmitButton
-            mensajeConfirmacion="¿Eliminar esta respuesta?"
-            className="text-xs font-semibold text-red-700 hover:underline"
-          >
-            Eliminar
-          </ConfirmSubmitButton>
-        </form>
-      )}
-    </article>
+      </div>
+    </div>
   );
 }

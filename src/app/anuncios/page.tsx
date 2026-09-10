@@ -8,9 +8,6 @@ import { novedadesTransporte } from "@/data/novedades";
 import { formatearFecha } from "@/lib/date";
 import Link from "next/link";
 import { lineas } from "@/data/transporte";
-import { DestinatarioSelector } from "@/components/DestinatarioSelector";
-import type { DestinatarioSeleccionado } from "@/data/destinatarios";
-import { useState } from "react";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
@@ -132,30 +129,6 @@ export default function AnunciosPage() {
             })
           )}
         </div>
-
-        <section className="w-full">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
-            Nuevo Aviso - Seleccionar Destinatario(s)
-          </h2>
-          <DestinatarioSelector
-            onChange={setDestinatario}
-            placeholder="Buscar persona, curso o departamento..."
-          />
-          <pre className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs text-zinc-600 dark:text-zinc-300 overflow-auto">
-            {JSON.stringify(destinatario, null, 2)}
-          </pre>
-        </section>
-
-        <section className="w-full">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
-            Anuncios Existentes
-          </h2>
-          <div className="flex flex-col gap-3">
-            {anuncios.map((anuncio) => (
-              <AnuncioCard key={anuncio.id} {...anuncio} />
-            ))}
-          </div>
-        </section>
       </main>
     </div>
   );
