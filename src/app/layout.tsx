@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { MensajeriaProvider } from "@/lib/mensajeria-context";
+import { AuthProvider } from "@/lib/auth";
 import { Topbar } from "@/components/Topbar";
 import "./globals.css";
 
@@ -23,10 +24,12 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <MensajeriaProvider>
-          <Topbar />
-          <main className="flex-1">{children}</main>
-        </MensajeriaProvider>
+        <AuthProvider>
+          <MensajeriaProvider>
+            <Topbar />
+            <main className="flex-1">{children}</main>
+          </MensajeriaProvider>
+        </AuthProvider>
       </body>
     </html>
   );
