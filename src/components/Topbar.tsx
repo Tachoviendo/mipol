@@ -29,22 +29,18 @@ export function Topbar() {
             <span>MiPol</span>
           </Link>
           <div className="hidden md:flex md:gap-1">
-            {NAV_ITEMS.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={
-                    isActive
-                      ? "rounded-lg bg-brand-50 px-3 py-2 text-sm font-medium text-brand-800 dark:bg-brand-900/40 dark:text-brand-200"
-                      : "rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-brand-50/60 hover:text-brand-700 dark:text-zinc-400 dark:hover:bg-brand-900/30 dark:hover:text-brand-200"
-                  }
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            <Link href="/lineas" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Líneas
+            </Link>
+            <Link href="/anuncios" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Anuncios
+            </Link>
+            <Link href="/calendario" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Calendario
+            </Link>
+            <Link href="/mapa" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Mapa
+            </Link>
           </div>
         </div>
 
