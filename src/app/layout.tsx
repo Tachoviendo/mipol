@@ -5,6 +5,8 @@ import { MensajeriaProvider } from "@/lib/mensajeria-context";
 import { AuthProvider } from "@/lib/auth";
 import { Topbar } from "@/components/Topbar";
 import "./globals.css";
+import { Topbar } from "@/components/Topbar";
+import { MensajesProvider } from "@/contexts/MensajesContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,23 +19,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Liceo 1° de Salto - MiPol",
-  description: "Plataforma del Liceo 1° de Salto.",
+  title: "mipol",
+  description: "Plataforma educativa del Liceo 1° de Salto",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AuthProvider>
-          <MensajeriaProvider>
-            <Topbar />
-            <main className="flex-1">{children}</main>
-          </MensajeriaProvider>
-        </AuthProvider>
+        <MensajesProvider>
+          <Topbar />
+          {children}
+        </MensajesProvider>
       </body>
     </html>
   );
