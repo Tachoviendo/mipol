@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
+/*
+  TEMA INSTITUCIONAL DEL LICEO
+  ============================
+  Acá se definen todos los valores del tema para que el estilo sea
+  consistente en todas las pantallas sin repetir valores.
+
+  Para ajustar el tema (colores institucionales, tipografías o
+  breakpoints) editar SOLO este archivo.
+
+  Colores institucionales
+  -----------------------
+  Paleta tentativa del Liceo (azul oscuro + celeste). Reemplazar los
+  valores hex por los códigos oficiales cuando estén disponibles.
+
+  Tipografías
+  -----------
+  `--font-sans` / `--font-mono` se enlazan a las fuentes Geist cargadas
+  en `src/app/layout.tsx` mediante CSS variables (`--font-geist-sans`,
+  `--font-geist-mono`).
+
+  Breakpoints
+  -----------
+  Se usa la escala por defecto de Tailwind:
+  sm 640px | md 768px | lg 1024px | xl 1280px | 2xl 1536px
+  Para personalizarlos, definir acá abajo `--breakpoint-*`.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Tokens de color institucional del Liceo */
+  --color-primary: #0f4c81;
+  --color-primary-dark: #0a355c;
+  --color-primary-light: #e8f1f9;
+  --color-secondary: #2ca6e0;
+  --color-secondary-dark: #1b7fb0;
+  --color-secondary-light: #e6f6fd;
+  --color-accent: #f5a623;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a1122;
+    --foreground: #e2e8f0;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }

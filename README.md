@@ -44,6 +44,25 @@ La ruta `/anuncios` (`src/app/anuncios/page.tsx`) muestra la convención en
 práctica: importa datos de `src/data/ejemplo.ts`, un helper de
 `src/lib/date.ts`, y renderiza el componente `src/components/AnuncioCard.tsx`.
 
+## Tema (Tailwind)
+
+El tema institucional del liceo (colores, tipografías y breakpoints) se define
+**en un solo lugar**: `src/app/globals.css` (bloque `@theme inline`).
+
+Para ajustarlo, editar ahí:
+
+- **Colores institucionales**: tokens `--color-primary*`, `--color-secondary*`
+  y `--color-accent`. Tienen una paleta tentativa (azul oscuro + celeste) que
+  debe reemplazarse por los códigos hex oficiales.
+- **Tipografías**: `--font-sans` y `--font-mono`, enlazadas a las fuentes
+  Geist cargadas en `src/app/layout.tsx`.
+- **Breakpoints**: se usa la escala por defecto de Tailwind
+  (`sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px, `2xl` 1536px). Para
+  personalizarlos, definir `--breakpoint-*` en el mismo bloque.
+
+Usar siempre estos tokens en clases (`bg-primary`, `text-secondary`, etc.) en
+vez de colores sueltos, para mantener un estilo consistente.
+
 ## Más información
 
 - [Documentación de Next.js](https://nextjs.org/docs)
