@@ -38,7 +38,7 @@ export default function CalendarioPage() {
           </h1>
           <button
             onClick={handleCrearEvento}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             + Nuevo evento
           </button>

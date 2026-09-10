@@ -15,10 +15,19 @@ export function MensajeItem({
   esPropio: boolean;
 }) {
   return (
+ 22-f-09-paleta-y-look-feel-spike
+    <article
+      className={
+        mensaje.esInicial
+          ? "border-l-4 border-teal-500 bg-teal-50 p-6"
+          : "border-t border-zinc-200 py-6"
+      }
+
     <div
       className={`flex flex-col gap-1 ${
         esPropio ? "items-end" : "items-start"
       }`}
+ main
     >
       <div className="flex items-center gap-2 text-xs text-zinc-500">
         <span className="font-medium text-zinc-700 dark:text-zinc-300">

@@ -110,7 +110,7 @@ export function FormularioEvento({
               required
               value={titulo}
               onChange={(e) => setTitulo(e.target.value)}
-              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
               placeholder="Ej: Clase de Matemática"
             />
           </div>
@@ -121,7 +121,7 @@ export function FormularioEvento({
               type="checkbox"
               checked={todoElDia}
               onChange={(e) => setTodoElDia(e.target.checked)}
-              className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+              className="h-4 w-4 rounded border-zinc-300 text-brand-600 focus:ring-brand-500"
             />
             Todo el día
           </label>
@@ -138,7 +138,7 @@ export function FormularioEvento({
                 required
                 value={fecha}
                 onChange={(e) => setFecha(e.target.value)}
-                className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+                className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
               />
             </div>
             {!todoElDia && (
@@ -152,7 +152,7 @@ export function FormularioEvento({
                   required
                   value={hora}
                   onChange={(e) => setHora(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+                  className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
                 />
               </div>
             )}
@@ -171,7 +171,7 @@ export function FormularioEvento({
                 step={5}
                 value={duracion}
                 onChange={(e) => setDuracion(Number(e.target.value))}
-                className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+                className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
               />
             </div>
           )}
@@ -186,7 +186,7 @@ export function FormularioEvento({
               required
               value={tipo}
               onChange={(e) => setTipo(e.target.value as TipoEvento)}
-              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
             >
               {TIPOS.map((t) => (
                 <option key={t.value} value={t.value}>
@@ -206,7 +206,7 @@ export function FormularioEvento({
               type="text"
               value={cursoGrupo}
               onChange={(e) => setCursoGrupo(e.target.value)}
-              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
               placeholder="Ej: 5° A, Docentes"
             />
           </div>
@@ -221,7 +221,7 @@ export function FormularioEvento({
               required
               value={visibilidad}
               onChange={(e) => setVisibilidad(e.target.value as VisibilidadEvento)}
-              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
             >
               {VISIBILIDADES.map((v) => (
                 <option key={v.value} value={v.value}>
@@ -241,7 +241,7 @@ export function FormularioEvento({
               type="text"
               value={ubicacion}
               onChange={(e) => setUbicacion(e.target.value)}
-              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
               placeholder="Ej: Aula 204"
             />
           </div>
@@ -256,7 +256,7 @@ export function FormularioEvento({
               rows={3}
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
-              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
+              className="mt-1 block w-full rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 dark:border-white/[.145] dark:bg-zinc-800 dark:text-zinc-100"
               placeholder="Descripción opcional del evento"
             />
           </div>
@@ -273,7 +273,7 @@ export function FormularioEvento({
           </button>
           <button
             type="submit"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             {evento ? "Guardar cambios" : "Crear evento"}
           </button>
