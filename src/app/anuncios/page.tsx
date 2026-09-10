@@ -1,6 +1,10 @@
+"use client";
+
+"use client";
+
 import { AnuncioCard } from "@/components/AnuncioCard";
 import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
-import { AdminLogin } from "@/components/AdminLogin";
+import { RequireRole } from "@/components/RequireRole";
 import { anuncios } from "@/data/ejemplo";
 import { novedadesTransporte } from "@/data/novedades";
 import { formatearFecha } from "@/lib/date";
@@ -12,10 +16,11 @@ import { useState } from "react";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
- * Incluye formulario de publicación para administradores.
+ * El formulario de publicación solo se ve con rol Administración.
  */
 export default function AnunciosPage() {
-  // Combinar anuncios y novedades, ordenar por fecha descendente
+  const [destinatario, setDestinatario] = useState<DestinatarioSeleccionado | null>(null);
+
   const todosLosAnuncios = [
     ...anuncios.map((a) => ({ ...a, tipo: "anuncio" as const })),
     ...novedadesTransporte.map((n) => ({
@@ -56,33 +61,21 @@ export default function AnunciosPage() {
   return (
     <div className="flex flex-1 flex-col items-center bg-primary-light px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
- 3-f-02-configuración-de-tailwind
-        <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
-          Anuncios
-        </h1>
-        <p className="text-sm text-foreground/70">
-          Página de ejemplo que sigue la convención de carpetas del proyecto.
-        </p>
-
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
+          <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
             Anuncios y novedades
           </h1>
-          <div className="flex items-center gap-4">
-            <AdminLogin />
-            <Link
-              href="/lineas"
-              className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            >
-              Ver líneas →
-            </Link>
-          </div>
+          <Link
+            href="/lineas"
+            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            Ver líneas →
+          </Link>
         </div>
 
-        {/* Formulario de publicación (solo admin) */}
+        {/* Formulario de publicación — visible solo para Administración */}
         <NovedadTransporteForm />
 
- main
         <div className="flex flex-col gap-3">
           {todosLosAnuncios.length === 0 ? (
             <p className="text-center text-zinc-600 dark:text-zinc-400 py-8">
@@ -136,18 +129,20 @@ export default function AnunciosPage() {
           )}
         </div>
 
-        <section className="w-full">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
-            Nuevo Aviso - Seleccionar Destinatario(s)
-          </h2>
-          <DestinatarioSelector
-            onChange={setDestinatario}
-            placeholder="Buscar persona, curso o departamento..."
-          />
-          <pre className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs text-zinc-600 dark:text-zinc-300 overflow-auto">
-            {JSON.stringify(destinatario, null, 2)}
-          </pre>
-        </section>
+        <RequireRole roles={["administracion"]}>
+          <section className="w-full">
+            <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
+              Nuevo Aviso - Seleccionar Destinatario(s)
+            </h2>
+            <DestinatarioSelector
+              onChange={setDestinatario}
+              placeholder="Buscar persona, curso o departamento..."
+            />
+            <pre className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs text-zinc-600 dark:text-zinc-300 overflow-auto">
+              {JSON.stringify(destinatario, null, 2)}
+            </pre>
+          </section>
+        </RequireRole>
 
         <section className="w-full">
           <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">

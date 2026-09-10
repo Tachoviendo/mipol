@@ -21,6 +21,9 @@ export const AUTOR_SIMULADO: Record<Rol, string> = {
 export const ROL_COOKIE = "mipol_rol";
 export const ROL_POR_DEFECTO: Rol = "estudiante";
 
+// Rol simulado persistido en el navegador (client context `useAuth`).
+export const ROL_STORAGE_KEY = "mipol_rol_activo";
+
 export const NOMBRE_COOKIE = "mipol_nombre";
 export const NOMBRE_MAX_LENGTH = 60;
 

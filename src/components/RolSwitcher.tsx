@@ -1,18 +1,31 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { establecerRolAction } from "@/app/foros/actions";
+import { useAuth } from "@/lib/auth";
 import { NOMBRE_MAX_LENGTH, ROLES, type Rol } from "@/lib/roles";
 
-export function RolSwitcher({
-  rolActual,
-  nombreActual,
-}: {
-  rolActual: Rol;
-  nombreActual?: string;
-}) {
+/**
+ * Selector de rol simulado del prototipo.
+ *
+ * - El rol elegido se guarda en `useAuth` (persistido en localStorage, ver
+ *   `src/lib/auth.tsx`), por lo que se recuerda entre visitas.
+ * - Al cambiar también se envía el rol a `establecerRolAction` (cookie) para
+ *   que las pantallas que leen el rol desde el servidor (ej. foros) usen el
+ *   mismo rol seleccionado.
+ */
+export function RolSwitcher() {
+  const { userRole, setUserRole } = useAuth();
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Reenviar el rol actual a la cookie del servidor al montar y al cambiar,
+  // para mantener sincronizados los dos mecanismos (client context y cookie).
+  useEffect(() => {
+    const formData = new FormData();
+    formData.set("rol", userRole);
+    void establecerRolAction(formData);
+  }, [userRole]);
 
   return (
     <form
@@ -26,8 +39,8 @@ export function RolSwitcher({
       <select
         id="rol"
         name="rol"
-        defaultValue={rolActual}
-        onChange={() => formRef.current?.requestSubmit()}
+        value={userRole}
+        onChange={(e) => setUserRole(e.target.value as Rol)}
         className="rounded-lg border border-zinc-300 bg-white px-2 py-1 text-sm text-zinc-800"
       >
         {ROLES.map((rol) => (
@@ -44,9 +57,8 @@ export function RolSwitcher({
         name="nombre"
         type="text"
         maxLength={NOMBRE_MAX_LENGTH}
-        defaultValue={nombreActual ?? ""}
+        defaultValue={""}
         placeholder="(usa el rol por defecto)"
-        onBlur={() => formRef.current?.requestSubmit()}
         className="w-40 rounded-lg border border-zinc-300 bg-white px-2 py-1 text-sm text-zinc-800"
       />
     </form>

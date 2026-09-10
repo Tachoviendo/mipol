@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMensajeria } from "@/lib/mensajeria-context";
+import { RolSwitcher } from "@/components/RolSwitcher";
 
 export function Topbar() {
   const { totalNoLeidos } = useMensajeria();
@@ -55,10 +56,9 @@ export function Topbar() {
             )}
           </Link>
 
-          <div className="flex items-center gap-2 rounded-lg bg-black/[.06] px-3 py-2 text-sm font-medium text-zinc-600 dark:bg-white/[.08] dark:text-zinc-400">
-            <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
-            <span>Usuario Demo</span>
-          </div>
+          <div className="hidden sm:block h-6 w-px bg-zinc-200 dark:bg-zinc-700" aria-hidden="true" />
+
+          <RolSwitcher />
         </div>
       </nav>
     </header>
