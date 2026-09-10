@@ -1,5 +1,3 @@
-"use client";
-
 import { AnuncioCard } from "@/components/AnuncioCard";
 import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
 import { AdminLogin } from "@/components/AdminLogin";
@@ -56,8 +54,16 @@ export default function AnunciosPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-zinc-50 px-6 py-16 dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-primary-light px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
+ 3-f-02-configuración-de-tailwind
+        <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
+          Anuncios
+        </h1>
+        <p className="text-sm text-foreground/70">
+          Página de ejemplo que sigue la convención de carpetas del proyecto.
+        </p>
+
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
             Anuncios y novedades
@@ -76,6 +82,7 @@ export default function AnunciosPage() {
         {/* Formulario de publicación (solo admin) */}
         <NovedadTransporteForm />
 
+ main
         <div className="flex flex-col gap-3">
           {todosLosAnuncios.length === 0 ? (
             <p className="text-center text-zinc-600 dark:text-zinc-400 py-8">
