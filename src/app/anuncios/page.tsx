@@ -1,3 +1,5 @@
+"use client";
+
 import { AnuncioCard } from "@/components/AnuncioCard";
 import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
 import { AdminLogin } from "@/components/AdminLogin";
@@ -6,9 +8,6 @@ import { novedadesTransporte } from "@/data/novedades";
 import { formatearFecha } from "@/lib/date";
 import Link from "next/link";
 import { lineas } from "@/data/transporte";
-import { DestinatarioSelector } from "@/components/DestinatarioSelector";
-import type { DestinatarioSeleccionado } from "@/data/destinatarios";
-import { useState } from "react";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
@@ -56,7 +55,7 @@ export default function AnunciosPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-primary-light px-6 py-16 dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-zinc-50 px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
         <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
           Anuncios
@@ -135,30 +134,6 @@ export default function AnunciosPage() {
             })
           )}
         </div>
-
-        <section className="w-full">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
-            Nuevo Aviso - Seleccionar Destinatario(s)
-          </h2>
-          <DestinatarioSelector
-            onChange={setDestinatario}
-            placeholder="Buscar persona, curso o departamento..."
-          />
-          <pre className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs text-zinc-600 dark:text-zinc-300 overflow-auto">
-            {JSON.stringify(destinatario, null, 2)}
-          </pre>
-        </section>
-
-        <section className="w-full">
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
-            Anuncios Existentes
-          </h2>
-          <div className="flex flex-col gap-3">
-            {anuncios.map((anuncio) => (
-              <AnuncioCard key={anuncio.id} {...anuncio} />
-            ))}
-          </div>
-        </section>
       </main>
     </div>
   );
