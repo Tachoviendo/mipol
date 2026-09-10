@@ -1,4 +1,5 @@
 import { AnuncioCard } from "@/components/AnuncioCard";
+import { EstadoVacio } from "@/components/EstadoVacio";
 import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
 import { AdminLogin } from "@/components/AdminLogin";
 import { anuncios } from "@/data/ejemplo";
@@ -82,12 +83,13 @@ export default function AnunciosPage() {
         {/* Formulario de publicación (solo admin) */}
         <NovedadTransporteForm />
 
- main
-        <div className="flex flex-col gap-3">
+ <div className="flex flex-col gap-3">
           {todosLosAnuncios.length === 0 ? (
-            <p className="text-center text-zinc-600 dark:text-zinc-400 py-8">
-              No hay anuncios ni novedades disponibles
-            </p>
+            <EstadoVacio
+              icono="mensaje"
+              titulo="Todavía no hay anuncios"
+              descripcion="Cuando la comunidad publique novedades, las verás acá."
+            />
           ) : (
             todosLosAnuncios.map((item) => {
               const isNovedad = item.tipo === "novedad";

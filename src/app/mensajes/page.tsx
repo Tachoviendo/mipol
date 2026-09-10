@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { EstadoVacio } from "@/components/EstadoVacio";
 import { useMensajeria } from "@/lib/mensajeria-context";
 import type { Conversacion, Mensaje } from "@/data/mensajeria";
 import { conversacionesMock, mensajesMock } from "@/data/mensajeria";
@@ -38,7 +39,14 @@ export default function MensajesPage() {
               )}
             </h2>
             <div className="flex-1 overflow-y-auto flex flex-col gap-2">
-              {conversaciones.map((conv) => (
+              {conversaciones.length === 0 ? (
+                <EstadoVacio
+                  icono="mensaje"
+                  titulo="Todavía no hay conversaciones"
+                  descripcion="Cuando recibas o inicies un mensaje, aparecerá acá."
+                />
+              ) : (
+                conversaciones.map((conv) => (
                 <button
                   key={conv.id}
                   onClick={() => setConversacionSeleccionada(conv)}
@@ -83,6 +91,8 @@ export default function MensajesPage() {
                   </div>
                 </button>
               ))}
+
+              )}
             </div>
           </aside>
 
@@ -179,9 +189,11 @@ export default function MensajesPage() {
                 </div>
               </>
             ) : (
-              <div className="flex-1 flex items-center justify-center text-zinc-500 dark:text-zinc-400">
-                <p>Selecciona una conversación para ver los mensajes</p>
-              </div>
+              <EstadoVacio
+                icono="mensaje"
+                titulo="Ninguna conversación seleccionada"
+                descripcion="Elegí una conversación de la lista para ver los mensajes."
+              />
             )}
           </section>
         </div>
