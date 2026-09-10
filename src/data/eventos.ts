@@ -180,3 +180,18 @@ export function colorPorTipo(tipo: TipoEvento): string {
   };
   return colores[tipo];
 }
+
+export function proximosEventos(cantidad: number = 5): EventoCalendario[] {
+  const ahora = new Date().getTime();
+  return eventosCalendario
+    .filter((ev) => new Date(ev.fechaInicio).getTime() >= ahora)
+    .sort(
+      (a, b) =>
+        new Date(a.fechaInicio).getTime() - new Date(b.fechaInicio).getTime(),
+    )
+    .slice(0, cantidad);
+}
+
+export function eventoPorId(id: string): EventoCalendario | undefined {
+  return eventosCalendario.find((ev) => ev.id === id);
+}
