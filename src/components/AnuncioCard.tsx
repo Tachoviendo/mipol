@@ -6,16 +6,16 @@ import type { Anuncio } from "@/data/ejemplo";
  */
 export function AnuncioCard({ titulo, descripcion, fecha }: Anuncio) {
   return (
-    <article className="rounded-lg border border-black/[.08] p-5 dark:border-white/[.145]">
-      <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+    <article className="rounded-lg border border-primary-light bg-white p-5 shadow-sm dark:border-white/[.145] dark:bg-white/[.04]">
+      <h2 className="text-lg font-semibold text-primary dark:text-secondary-light">
         {titulo}
       </h2>
-      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="mt-1 text-sm text-foreground/70">
         {descripcion}
       </p>
       <time
         dateTime={fecha}
-        className="mt-3 block text-xs uppercase tracking-wide text-zinc-500"
+        className="mt-3 block text-xs uppercase tracking-wide text-secondary-dark"
       >
         {formatearFecha(fecha)}
       </time>
