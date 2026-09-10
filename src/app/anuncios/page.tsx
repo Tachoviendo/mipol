@@ -17,6 +17,10 @@ import { useState } from "react";
  * Incluye formulario de publicación para administradores.
  */
 export default function AnunciosPage() {
+  const [destinatario, setDestinatario] = useState<
+    DestinatarioSeleccionado | null
+  >(null);
+
   // Combinar anuncios y novedades, ordenar por fecha descendente
   const todosLosAnuncios = [
     ...anuncios.map((a) => ({ ...a, tipo: "anuncio" as const })),

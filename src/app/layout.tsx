@@ -1,5 +1,3 @@
-"use client";
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/lib/auth";
@@ -29,19 +27,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AuthProvider>{children}</AuthProvider>
-  title: "MiPol",
-  description: "Sistema de transporte y mensajería",
-};
-
-export default function RootLayout({ children }: React.PropsWithChildren) {
-  return (
-    <html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <MensajeriaProvider>
-          <Topbar />
-          <main className="flex-1">{children}</main>
-        </MensajeriaProvider>
+        <AuthProvider>
+          <MensajeriaProvider>
+            <Topbar />
+            <main className="flex-1">{children}</main>
+          </MensajeriaProvider>
+        </AuthProvider>
       </body>
     </html>
   );
