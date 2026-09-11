@@ -38,3 +38,20 @@ export function puedeParticiparEnForos(rol: Rol): boolean {
 export function puedeModerarForos(rol: Rol): boolean {
   return rol === "administracion";
 }
+
+// GR: espacios de trabajo por curso/materia (similar a CREA o Google Classroom).
+// - Docentes crean y administran grupos.
+// - Estudiantes participan y acceden a los materiales compartidos.
+// - Administración tiene visibilidad global.
+// - Público no tiene acceso.
+export function puedeVerGrupos(rol: Rol): boolean {
+  return rol !== "publico";
+}
+
+export function puedeCrearGrupos(rol: Rol): boolean {
+  return rol === "docente";
+}
+
+export function puedeComentarEnGrupos(rol: Rol): boolean {
+  return rol === "estudiante" || rol === "docente" || rol === "administracion";
+}
