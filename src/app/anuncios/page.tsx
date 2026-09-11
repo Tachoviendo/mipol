@@ -1,28 +1,26 @@
 "use client";
 
-import { AnuncioCard } from "@/components/AnuncioCard";
-import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
-import { AdminLogin } from "@/components/AdminLogin";
-import { anuncios } from "@/data/ejemplo";
-import { novedadesTransporte } from "@/data/novedades";
-import { formatearFecha } from "@/lib/date";
+import { useState } from "react";
 import Link from "next/link";
+
+import { AdminLogin } from "@/components/AdminLogin";
+import { AnuncioCard } from "@/components/AnuncioCard";
+import { DestinatarioSelector } from "@/components/DestinatarioSelector";
+import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
+import { RequireRole } from "@/components/RequireRole";
+import { anuncios } from "@/data/ejemplo";
+import type { DestinatarioSeleccionado } from "@/data/destinatarios";
+import { novedadesTransporte } from "@/data/novedades";
 import { lineas } from "@/data/transporte";
+import { formatearFecha } from "@/lib/date";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
  * Incluye formulario de publicación para administradores.
  */
 export default function AnunciosPage() {
- 22-f-09-paleta-y-look-feel-spike
-  const [destinatario, setDestinatario] = useState<DestinatarioSeleccionado>({
-    tipo: "persona",
-    items: [],
-  });
-
   const [destinatario, setDestinatario] = useState<DestinatarioSeleccionado | null>(null);
 
- main
   // Combinar anuncios y novedades, ordenar por fecha descendente
   const todosLosAnuncios = [
     ...anuncios.map((a) => ({ ...a, tipo: "anuncio" as const })),
@@ -64,16 +62,6 @@ export default function AnunciosPage() {
   return (
     <div className="flex flex-1 flex-col items-center bg-zinc-50 px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
-22-f-09-paleta-y-look-feel-spike
-
-        <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
-          Anuncios
-        </h1>
-        <p className="text-sm text-foreground/70">
-          Página de ejemplo que sigue la convención de carpetas del proyecto.
-        </p>
-
- main
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
             Anuncios y novedades
@@ -89,7 +77,7 @@ export default function AnunciosPage() {
           </div>
         </div>
 
-        {/* Formulario de publicación (solo admin) */}
+        {/* Formulario de publicación (solo administración) */}
         <NovedadTransporteForm />
 
         <div className="flex flex-col gap-3">
@@ -144,6 +132,32 @@ export default function AnunciosPage() {
             })
           )}
         </div>
+
+        <RequireRole roles={["administracion"]}>
+          <section className="w-full">
+            <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
+              Nuevo Aviso - Seleccionar Destinatario(s)
+            </h2>
+            <DestinatarioSelector
+              onChange={setDestinatario}
+              placeholder="Buscar persona, curso o departamento..."
+            />
+            <pre className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs text-zinc-600 dark:text-zinc-300 overflow-auto">
+              {JSON.stringify(destinatario, null, 2)}
+            </pre>
+          </section>
+        </RequireRole>
+
+        <section className="w-full">
+          <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50 mb-4">
+            Anuncios Existentes
+          </h2>
+          <div className="flex flex-col gap-3">
+            {anuncios.map((anuncio) => (
+              <AnuncioCard key={anuncio.id} {...anuncio} />
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

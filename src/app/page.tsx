@@ -1,5 +1,4 @@
- 22-f-09-paleta-y-look-feel-spike
-import Link from "next/link";
+ import Link from "next/link";
 
 const MODULOS = [
   {
@@ -38,10 +37,8 @@ export default async function Home() {
     obtenerRolActual(),
     obtenerNombreMostrado(),
   ]);
- main
 
   return (
- 22-f-09-paleta-y-look-feel-spike
     <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex w-full max-w-3xl flex-col gap-8 px-6 py-12">
         <div className="flex flex-col gap-2 text-center">
@@ -76,7 +73,6 @@ export default async function Home() {
             Selector temporal, hasta que exista autenticación real
           </span>
           <RolSwitcher rolActual={rol} nombreActual={nombre} />
- main
         </div>
       </div>
       <ResumenHome rol={rol} />
