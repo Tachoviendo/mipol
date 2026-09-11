@@ -13,7 +13,7 @@ export function HiloForoRow({
   return (
     <Link
       href={`/foros/${hilo.categoriaId}/${hilo.id}`}
-      className="grid gap-4 border-b border-zinc-200 px-5 py-5 transition hover:bg-emerald-50/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:grid-cols-[1fr_auto] sm:items-center"
+      className="grid gap-4 border-b border-zinc-200 px-5 py-5 transition hover:bg-brand-50/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500 sm:grid-cols-[1fr_auto] sm:items-center"
     >
       <div>
         <div className="flex flex-wrap items-center gap-2">

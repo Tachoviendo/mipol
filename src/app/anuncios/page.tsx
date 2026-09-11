@@ -1,23 +1,27 @@
 "use client";
 
-"use client";
+import { useState } from "react";
+import Link from "next/link";
 
+import { AdminLogin } from "@/components/AdminLogin";
 import { AnuncioCard } from "@/components/AnuncioCard";
+import { DestinatarioSelector } from "@/components/DestinatarioSelector";
 import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
 import { RequireRole } from "@/components/RequireRole";
 import { anuncios } from "@/data/ejemplo";
+import type { DestinatarioSeleccionado } from "@/data/destinatarios";
 import { novedadesTransporte } from "@/data/novedades";
-import { formatearFecha } from "@/lib/date";
-import Link from "next/link";
 import { lineas } from "@/data/transporte";
+import { formatearFecha } from "@/lib/date";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
- * El formulario de publicación solo se ve con rol Administración.
+ * Incluye formulario de publicación para administradores.
  */
 export default function AnunciosPage() {
   const [destinatario, setDestinatario] = useState<DestinatarioSeleccionado | null>(null);
 
+  // Combinar anuncios y novedades, ordenar por fecha descendente
   const todosLosAnuncios = [
     ...anuncios.map((a) => ({ ...a, tipo: "anuncio" as const })),
     ...novedadesTransporte.map((n) => ({
@@ -39,7 +43,7 @@ export default function AnunciosPage() {
       case "media":
         return "border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/20";
       case "baja":
-        return "border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20";
+        return "border-l-4 border-brand-500 bg-brand-50 dark:bg-brand-900/20";
       default:
         return "";
     }
@@ -50,7 +54,7 @@ export default function AnunciosPage() {
       demora: { label: "Demora", className: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400" },
       cambio_ruta: { label: "Cambio ruta", className: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400" },
       suspension: { label: "Suspensión", className: "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-400" },
-      otro: { label: "Otro", className: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400" },
+      otro: { label: "Otro", className: "bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-300" },
     };
     return badges[tipo] || { label: tipo, className: "bg-zinc-100 text-zinc-800" };
   };
@@ -59,18 +63,21 @@ export default function AnunciosPage() {
     <div className="flex flex-1 flex-col items-center bg-zinc-50 px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
+          <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
             Anuncios y novedades
           </h1>
-          <Link
-            href="/lineas"
-            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-          >
-            Ver líneas →
-          </Link>
+          <div className="flex items-center gap-4">
+            <AdminLogin />
+            <Link
+              href="/lineas"
+              className="text-sm text-brand-700 hover:text-brand-800 dark:text-brand-300 dark:hover:text-brand-200"
+            >
+              Ver líneas →
+            </Link>
+          </div>
         </div>
 
-        {/* Formulario de publicación — visible solo para Administración */}
+        {/* Formulario de publicación (solo administración) */}
         <NovedadTransporteForm />
 
         <div className="flex flex-col gap-3">

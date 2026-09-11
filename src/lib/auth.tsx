@@ -1,11 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 import {
   ROL_POR_DEFECTO,
-  ROL_STORAGE_KEY,
-  esRolValido,
   type Rol,
 } from "@/lib/roles";
 
@@ -23,19 +21,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [userRole, setUserRole] = useState<Rol>(ROL_POR_DEFECTO);
-
-  // Hidratar el rol guardado en localStorage al montar (solo cliente).
-  useEffect(() => {
-    const guardado = localStorage.getItem(ROL_STORAGE_KEY);
-    if (esRolValido(guardado)) {
-      setUserRole(guardado);
-    }
-  }, []);
-
-  // Recordar el rol elegido entre visitas.
-  useEffect(() => {
-    localStorage.setItem(ROL_STORAGE_KEY, userRole);
-  }, [userRole]);
 
   return (
     <AuthContext.Provider
