@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: "/lineas", label: "Líneas" },
   { href: "/anuncios", label: "Anuncios" },
   { href: "/calendario", label: "Calendario" },
+  { href: "/grupos", label: "Grupos" },
 ];
 
 export function Topbar() {
@@ -40,6 +41,9 @@ export function Topbar() {
             </Link>
             <Link href="/mapa" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
               Mapa
+            </Link>
+            <Link href="/grupos" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Grupos
             </Link>
           </div>
         </div>
