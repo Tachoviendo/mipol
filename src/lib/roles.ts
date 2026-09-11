@@ -38,3 +38,28 @@ export function puedeParticiparEnForos(rol: Rol): boolean {
 export function puedeModerarForos(rol: Rol): boolean {
   return rol === "administracion";
 }
+
+// GR: espacios de trabajo por curso/materia (similar a CREA o Google Classroom).
+// Docentes crean grupos, publican, comparten materiales, crean tareas y hacen
+// seguimiento de entregas; estudiantes participan, comentan y entregan tareas;
+// administración tiene visibilidad global de lectura; el público no accede.
+export function puedeVerGrupos(rol: Rol): boolean {
+  return rol !== "publico";
+}
+
+export function puedeCrearGrupos(rol: Rol): boolean {
+  return rol === "docente";
+}
+
+export function puedeCrearTareas(rol: Rol): boolean {
+  return rol === "docente";
+}
+
+export function puedeComentarEnGrupos(rol: Rol): boolean {
+  return rol === "estudiante" || rol === "docente" || rol === "administracion";
+}
+
+// La entrega de tareas es una acción del estudiante sobre su propio trabajo.
+export function puedeEntregarTareas(rol: Rol): boolean {
+  return rol === "estudiante";
+}
