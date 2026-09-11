@@ -91,7 +91,7 @@ export function EstadoVacio({
       {accion && (
         <Link
           href={accion.href}
-          className="mt-2 rounded-lg bg-emerald-800 px-4 py-2 text-sm font-semibold text-white"
+          className="mt-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white"
         >
           {accion.etiqueta}
         </Link>

@@ -1,17 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useMensajeria } from "@/lib/mensajeria-context";
+
+const NAV_ITEMS = [
+  { href: "/lineas", label: "Líneas" },
+  { href: "/anuncios", label: "Anuncios" },
+  { href: "/calendario", label: "Calendario" },
+];
 
 export function Topbar() {
   const { totalNoLeidos } = useMensajeria();
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/[.08] bg-white/80 backdrop-blur-sm dark:border-white/[.145] dark:bg-zinc-900/80">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3" aria-label="Navegación principal">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3"
+        aria-label="Navegación principal"
+      >
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-black dark:text-zinc-50">
-            <span className="h-8 w-8 rounded-lg bg-blue-600" aria-hidden="true" />
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-semibold text-brand-800 dark:text-brand-200"
+          >
+            <span className="h-8 w-8 rounded-lg bg-brand-600" aria-hidden="true" />
             <span>MiPol</span>
           </Link>
           <div className="hidden md:flex md:gap-1">
@@ -24,13 +38,16 @@ export function Topbar() {
             <Link href="/calendario" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
               Calendario
             </Link>
+            <Link href="/mapa" className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]">
+              Mapa
+            </Link>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
           <Link
             href="/mensajes"
-            className="relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-black/[.04] dark:text-zinc-400 dark:hover:bg-white/[.06]"
+            className="relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-brand-50/60 hover:text-brand-700 dark:text-zinc-400 dark:hover:bg-brand-900/30 dark:hover:text-brand-200"
             aria-label="Mensajes"
           >
             <svg
@@ -59,7 +76,10 @@ export function Topbar() {
           </Link>
 
           <div className="flex items-center gap-2 rounded-lg bg-black/[.06] px-3 py-2 text-sm font-medium text-zinc-600 dark:bg-white/[.08] dark:text-zinc-400">
-            <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
+            <span
+              className="h-2 w-2 rounded-full bg-teal-500"
+              aria-hidden="true"
+            />
             <span>Usuario Demo</span>
           </div>
         </div>

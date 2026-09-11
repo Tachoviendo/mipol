@@ -172,7 +172,7 @@ export function CalendarioGrilla({
               <span
                 className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium ${
                   esHoy
-                    ? "bg-blue-600 text-white"
+                    ? "bg-brand-600 text-white"
                     : esMesActual
                       ? "text-zinc-900 dark:text-zinc-100"
                       : "text-zinc-400 dark:text-zinc-600"

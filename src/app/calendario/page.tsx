@@ -5,6 +5,7 @@ import { CalendarioGrilla } from "@/components/CalendarioGrilla";
 import { DetalleEventoModal } from "@/components/DetalleEventoModal";
 import { FiltrosCalendario } from "@/components/FiltrosCalendario";
 import { FormularioEvento } from "@/components/FormularioEvento";
+import { LeyendaCalendario } from "@/components/LeyendaCalendario";
 import { type EventoCalendario, type TipoEvento } from "@/data/eventos";
 
 export default function CalendarioPage() {
@@ -37,7 +38,7 @@ export default function CalendarioPage() {
           </h1>
           <button
             onClick={handleCrearEvento}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             + Nuevo evento
           </button>
@@ -49,6 +50,8 @@ export default function CalendarioPage() {
           filtros={filtros}
           onEventoClick={setEventoSeleccionado}
         />
+
+        <LeyendaCalendario />
 
         {eventoSeleccionado && (
           <DetalleEventoModal

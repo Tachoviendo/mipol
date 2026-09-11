@@ -35,7 +35,7 @@ export function BuscadorParadas() {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar por parada o zona..."
-          className="w-full rounded-xl border border-black/[.08] dark:border-white/[.145] bg-white dark:bg-zinc-900 px-5 py-4 text-lg text-black dark:text-zinc-50 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-xl border border-black/[.08] dark:border-white/[.145] bg-white dark:bg-zinc-900 px-5 py-4 text-lg text-black dark:text-zinc-50 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
         />
         {busqueda && (
           <button
@@ -66,7 +66,7 @@ export function BuscadorParadas() {
                     <span className="font-medium text-black dark:text-zinc-50">
                       {parada.nombre}
                     </span>
-                    <span className="rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-0.5 text-xs font-medium">
+                    <span className="rounded-full bg-brand-100 dark:bg-brand-900 text-brand-800 dark:text-brand-300 px-2 py-0.5 text-xs font-medium">
                       {parada.zona}
                     </span>
                   </div>

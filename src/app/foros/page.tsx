@@ -25,7 +25,7 @@ export default async function ForosPage({ searchParams }: ForosPageProps) {
     <div className="min-h-screen bg-zinc-50 px-6 py-12 text-zinc-950 sm:px-10 sm:py-16">
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-10">
         <header className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">
             Comunidad educativa
           </p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -83,7 +83,7 @@ export default async function ForosPage({ searchParams }: ForosPageProps) {
             </select>
             <button
               type="submit"
-              className="rounded-lg bg-emerald-800 px-4 py-2 text-sm font-semibold text-white"
+              className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white"
             >
               Buscar
             </button>
