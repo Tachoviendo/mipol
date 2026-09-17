@@ -1,5 +1,8 @@
- 22-f-09-paleta-y-look-feel-spike
 import Link from "next/link";
+
+import { ResumenHome } from "@/components/ResumenHome";
+import { RolSwitcher } from "@/components/RolSwitcher";
+import { obtenerNombreMostrado, obtenerRolActual } from "@/lib/rol-actual";
 
 const MODULOS = [
   {
@@ -27,21 +30,20 @@ const MODULOS = [
     titulo: "Foros",
     descripcion: "Discusiones por categorías y comisiones.",
   },
+  {
+    href: "/oferta",
+    titulo: "Oferta educativa",
+    descripcion: "Programas, cursos y actividades del liceo.",
+  },
 ];
-
-import { ResumenHome } from "@/components/ResumenHome";
-import { RolSwitcher } from "@/components/RolSwitcher";
-import { obtenerNombreMostrado, obtenerRolActual } from "@/lib/rol-actual";
 
 export default async function Home() {
   const [rol, nombre] = await Promise.all([
     obtenerRolActual(),
     obtenerNombreMostrado(),
   ]);
- main
 
   return (
- 22-f-09-paleta-y-look-feel-spike
     <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex w-full max-w-3xl flex-col gap-8 px-6 py-12">
         <div className="flex flex-col gap-2 text-center">
@@ -68,18 +70,20 @@ export default async function Home() {
               </p>
             </Link>
           ))}
-
-    <div className="flex flex-1 flex-col">
-      <div className="border-b border-zinc-200 bg-white px-6 py-3 sm:px-10">
-        <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-2">
-          <span className="text-xs uppercase tracking-wide text-zinc-400">
-            Selector temporal, hasta que exista autenticación real
-          </span>
-          <RolSwitcher rolActual={rol} nombreActual={nombre} />
- main
         </div>
-      </div>
-      <ResumenHome rol={rol} />
+
+        <div className="flex flex-col gap-4">
+          <div className="rounded-xl border border-black/[.08] bg-white px-6 py-3 dark:border-white/[.145] dark:bg-zinc-900">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="text-xs uppercase tracking-wide text-zinc-400">
+                Selector temporal, hasta que exista autenticación real
+              </span>
+              <RolSwitcher rolActual={rol} nombreActual={nombre} />
+            </div>
+          </div>
+          <ResumenHome rol={rol} />
+        </div>
+      </main>
     </div>
   );
 }
