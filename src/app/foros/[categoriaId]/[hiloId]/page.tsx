@@ -9,7 +9,7 @@ import {
   responderHiloAction,
 } from "@/app/foros/actions";
 import { ConfirmSubmitButton } from "@/components/ConfirmSubmitButton";
-import { MensajeItem } from "@/components/MensajeItem";
+import { MensajeForoItem } from "@/components/MensajeForoItem";
 import {
   LIMITE_MENSAJE,
   mensajesForo,
@@ -114,7 +114,7 @@ export default async function HiloPage({ params, searchParams }: HiloPageProps) 
 
         <section aria-label="Mensajes del hilo" className="rounded-2xl border border-zinc-200 bg-white px-5 shadow-sm sm:px-7">
           {mensajes.map((mensaje) => (
-            <MensajeItem
+            <MensajeForoItem
               key={mensaje.id}
               mensaje={mensaje}
               categoriaId={categoria.id}

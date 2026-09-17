@@ -1,31 +1,22 @@
 "use client";
 
-import { AnuncioCard } from "@/components/AnuncioCard";
-import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
+import Link from "next/link";
+
 import { AdminLogin } from "@/components/AdminLogin";
+import { NovedadTransporteForm } from "@/components/NovedadTransporteForm";
 import { anuncios } from "@/data/ejemplo";
 import { novedadesTransporte } from "@/data/novedades";
-import { formatearFecha } from "@/lib/date";
-import Link from "next/link";
 import { lineas } from "@/data/transporte";
+import { formatearFecha } from "@/lib/date";
 
 /**
  * `src/app/anuncios`: listado de anuncios y novedades de transporte.
  * Incluye formulario de publicación para administradores.
  */
 export default function AnunciosPage() {
- 22-f-09-paleta-y-look-feel-spike
-  const [destinatario, setDestinatario] = useState<DestinatarioSeleccionado>({
-    tipo: "persona",
-    items: [],
-  });
-
-  const [destinatario, setDestinatario] = useState<DestinatarioSeleccionado | null>(null);
-
- main
   // Combinar anuncios y novedades, ordenar por fecha descendente
   const todosLosAnuncios = [
-    ...anuncios.map((a) => ({ ...a, tipo: "anuncio" as const })),
+    ...anuncios.map((a) => ({ ...a, tipo: "anuncio" as const, lineaId: undefined })),
     ...novedadesTransporte.map((n) => ({
       id: n.id,
       titulo: n.titulo,
@@ -64,16 +55,6 @@ export default function AnunciosPage() {
   return (
     <div className="flex flex-1 flex-col items-center bg-zinc-50 px-6 py-16 dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-4">
-22-f-09-paleta-y-look-feel-spike
-
-        <h1 className="text-2xl font-semibold text-primary dark:text-secondary-light">
-          Anuncios
-        </h1>
-        <p className="text-sm text-foreground/70">
-          Página de ejemplo que sigue la convención de carpetas del proyecto.
-        </p>
-
- main
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
             Anuncios y novedades
@@ -94,7 +75,7 @@ export default function AnunciosPage() {
 
         <div className="flex flex-col gap-3">
           {todosLosAnuncios.length === 0 ? (
-            <p className="text-center text-zinc-600 dark:text-zinc-400 py-8">
+            <p className="py-8 text-center text-zinc-600 dark:text-zinc-400">
               No hay anuncios ni novedades disponibles
             </p>
           ) : (
