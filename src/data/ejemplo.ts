@@ -57,6 +57,19 @@ export const anuncios: Anuncio[] = [
   },
 ];
 
+/**
+ * Crea un comunicado oficial y lo agrega a los datos mock (OE-09).
+ * Se usa desde el alta/edición de programas de oferta (`FormularioProgramaOferta`).
+ */
+export function crearAnuncio(datos: Omit<Anuncio, "id">): Anuncio {
+  const anuncio: Anuncio = {
+    ...datos,
+    id: `c-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+  };
+  anuncios.push(anuncio);
+  return anuncio;
+}
+
 /** Últimos comunicados destacados para un rol, ordenados por fecha descendente. */
 export function comunicadosDestacadosParaRol(
   rol: Rol,
