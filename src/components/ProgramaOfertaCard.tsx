@@ -10,7 +10,13 @@ import type { ProgramaOferta } from "@/data/oferta";
  * `src/components/ProgramaOfertaCard.tsx`: tarjeta de un programa/cursos
  * del catálogo de oferta educativa.
  */
-export function ProgramaOfertaCard({ programa }: { programa: ProgramaOferta }) {
+export function ProgramaOfertaCard({
+  programa,
+  onEditar,
+}: {
+  programa: ProgramaOferta;
+  onEditar?: (programa: ProgramaOferta) => void;
+}) {
   const esTerciaria = programa.tipo === "terciaria";
 
   return (
@@ -63,6 +69,16 @@ export function ProgramaOfertaCard({ programa }: { programa: ProgramaOferta }) {
       >
         Ver programa
       </Link>
+
+      {onEditar && (
+        <button
+          type="button"
+          onClick={() => onEditar(programa)}
+          className="mt-2 inline-flex items-center justify-center rounded-md border border-black/[.12] px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:border-white/[.22] dark:text-zinc-300 dark:hover:bg-white/[.08]"
+        >
+          Editar
+        </button>
+      )}
     </article>
   );
 }

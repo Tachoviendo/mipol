@@ -1,24 +1,14 @@
-import { notFound } from "next/navigation";
+"use client";
+
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 import { programasOferta } from "@/data/oferta";
 import { ProgramaOfertaDetalle } from "@/components/ProgramaOfertaDetalle";
 
-export function generateStaticParams() {
-  return programasOferta.map((programa) => ({ id: programa.id }));
-}
-
-export default async function ProgramaPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default function ProgramaPage() {
+  const { id } = useParams<{ id: string }>();
   const programa = programasOferta.find((p) => p.id === id);
-
-  if (!programa) {
-    notFound();
-  }
 
   return (
     <div className="flex flex-col flex-1 items-center bg-zinc-50 font-sans dark:bg-black">
@@ -29,7 +19,14 @@ export default async function ProgramaPage({
         >
           &larr; Volver a la oferta educativa
         </Link>
-        <ProgramaOfertaDetalle programa={programa} />
+
+        {programa ? (
+          <ProgramaOfertaDetalle programa={programa} />
+        ) : (
+          <p className="rounded-xl border border-black/[.08] bg-white p-8 text-center text-sm text-zinc-500 dark:border-white/[.145] dark:bg-white/[.04]">
+            No encontramos ese programa de la oferta educativa.
+          </p>
+        )}
       </main>
     </div>
   );

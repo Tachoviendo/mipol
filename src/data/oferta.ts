@@ -164,15 +164,18 @@ export const programasOferta: ProgramaOferta[] = [
 
 // ─── Búsqueda y filtros (OE-05) ──────────────────────────────────────────────
 
-export function buscarProgramas(opciones: {
-  texto?: string;
-  area?: AreaOferta;
-  modalidad?: ModalidadOferta;
-  turno?: TurnoOferta;
-}): ProgramaOferta[] {
+export function buscarProgramas(
+  opciones: {
+    texto?: string;
+    area?: AreaOferta;
+    modalidad?: ModalidadOferta;
+    turno?: TurnoOferta;
+  },
+  fuente: ProgramaOferta[] = programasOferta,
+): ProgramaOferta[] {
   const texto = opciones.texto?.trim().toLowerCase();
 
-  return programasOferta.filter((programa) => {
+  return fuente.filter((programa) => {
     if (opciones.area && programa.area !== opciones.area) return false;
     if (opciones.modalidad && programa.modalidad !== opciones.modalidad) return false;
     if (opciones.turno && programa.turno !== opciones.turno) return false;
@@ -193,4 +196,24 @@ export function buscarProgramas(opciones: {
       coincideTurno
     );
   });
+}
+
+// ─── Alta / edición (OE-07) ──────────────────────────────────────────────────
+
+export function crearPrograma(
+  datos: Omit<ProgramaOferta, "id">
+): ProgramaOferta {
+  const programa: ProgramaOferta = {
+    ...datos,
+    id: `oe-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+  };
+  programasOferta.push(programa);
+  return programa;
+}
+
+export function actualizarPrograma(programa: ProgramaOferta): void {
+  const indice = programasOferta.findIndex((p) => p.id === programa.id);
+  if (indice !== -1) {
+    programasOferta[indice] = programa;
+  }
 }

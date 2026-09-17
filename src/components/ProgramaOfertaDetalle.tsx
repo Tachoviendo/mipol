@@ -94,11 +94,11 @@ export function ProgramaOfertaDetalle({
           </dd>
         </div>
 
-        <section className="rounded-xl border border-black/[.08] dark:border-white/[.145] bg-white dark:bg-zinc-900 p-4">
-          <h2 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-            Contacto e inscripción
+        <section className="rounded-xl border border-brand-200 bg-brand-50 p-5 dark:border-brand-800 dark:bg-brand-950/30">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-800 dark:text-brand-300">
+            ¿Cómo inscribirme?
           </h2>
-          <p className="mt-1 text-black dark:text-zinc-50">
+          <p className="mt-2 text-black dark:text-zinc-50">
             {programa.contactoInscripcion}
           </p>
         </section>

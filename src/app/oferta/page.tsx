@@ -2,13 +2,17 @@
 
 import { useMemo, useState } from "react";
 
+import { FormularioProgramaOferta } from "@/components/FormularioProgramaOferta";
 import { ProgramaOfertaCard } from "@/components/ProgramaOfertaCard";
+import { RequireRole } from "@/components/RequireRole";
 import {
   ETIQUETAS_AREA,
   ETIQUETAS_MODALIDAD,
   ETIQUETAS_TURNO,
+  actualizarPrograma,
   areasOferta,
   buscarProgramas,
+  crearPrograma,
   modalidadesOferta,
   programasOferta,
   turnosOferta,
@@ -16,9 +20,14 @@ import {
 import type {
   AreaOferta,
   ModalidadOferta,
+  ProgramaOferta,
   TipoOferta,
   TurnoOferta,
 } from "@/data/oferta";
+import { useAuth } from "@/lib/auth";
+import type { Rol } from "@/lib/roles";
+
+const ROLES_PUEDEN_PUBLICAR: Rol[] = ["docente", "administracion"];
 
 type FiltroTipo = "todas" | TipoOferta;
 
@@ -34,23 +43,34 @@ type FiltroModalidad = ModalidadOferta | typeof SIN_FILTRO;
 type FiltroTurno = TurnoOferta | typeof SIN_FILTRO;
 
 export default function OfertaPage() {
+  const { hasRole } = useAuth();
+  const puedePublicar = hasRole(ROLES_PUEDEN_PUBLICAR);
+
+  const [lista, setLista] = useState<ProgramaOferta[]>(programasOferta);
   const [filtroTipo, setFiltroTipo] = useState<FiltroTipo>("todas");
   const [texto, setTexto] = useState("");
   const [area, setArea] = useState<FiltroArea>(SIN_FILTRO);
   const [modalidad, setModalidad] = useState<FiltroModalidad>(SIN_FILTRO);
   const [turno, setTurno] = useState<FiltroTurno>(SIN_FILTRO);
+  const [formularioAbierto, setFormularioAbierto] = useState(false);
+  const [programaEditando, setProgramaEditando] = useState<ProgramaOferta | null>(
+    null
+  );
 
   const programas = useMemo(() => {
-    const filtrados = buscarProgramas({
-      texto,
-      area: area || undefined,
-      modalidad: modalidad || undefined,
-      turno: turno || undefined,
-    });
+    const filtrados = buscarProgramas(
+      {
+        texto,
+        area: area || undefined,
+        modalidad: modalidad || undefined,
+        turno: turno || undefined,
+      },
+      lista,
+    );
     return filtroTipo === "todas"
       ? filtrados
       : filtrados.filter((p) => p.tipo === filtroTipo);
-  }, [texto, area, modalidad, turno, filtroTipo]);
+  }, [texto, area, modalidad, turno, filtroTipo, lista]);
 
   const hayFiltros =
     texto.trim().length > 0 || Boolean(area || modalidad || turno);
@@ -62,22 +82,60 @@ export default function OfertaPage() {
     setTurno(SIN_FILTRO);
   };
 
+  const handleNuevoPrograma = () => {
+    setProgramaEditando(null);
+    setFormularioAbierto(true);
+  };
+
+  const handleEditarPrograma = (programa: ProgramaOferta) => {
+    setProgramaEditando(programa);
+    setFormularioAbierto(true);
+  };
+
+  const handleGuardarPrograma = (programa: ProgramaOferta) => {
+    if (programaEditando) {
+      actualizarPrograma(programa);
+    } else {
+      crearPrograma(programa);
+    }
+    setLista([...programasOferta]);
+    setFormularioAbierto(false);
+    setProgramaEditando(null);
+  };
+
+  const handleCancelarFormulario = () => {
+    setFormularioAbierto(false);
+    setProgramaEditando(null);
+  };
+
   const selectClases =
     "rounded-lg border border-black/[.08] bg-white px-3 py-2 text-sm text-zinc-700 dark:border-white/[.145] dark:bg-zinc-900 dark:text-zinc-300";
 
   return (
     <div className="flex flex-col flex-1 items-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-col w-full max-w-3xl gap-6 py-12 px-6">
-        <header>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-700 dark:text-brand-300">
-            Oferta educativa
-          </p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
-            Programas y cursos
-          </h1>
-          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-            Buscá y filtrá la oferta terciaria e interna del liceo.
-          </p>
+        <header className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-700 dark:text-brand-300">
+              Oferta educativa
+            </p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+              Programas y cursos
+            </h1>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+              Buscá y filtrá la oferta terciaria e interna del liceo.
+            </p>
+          </div>
+
+          <RequireRole roles={ROLES_PUEDEN_PUBLICAR}>
+            <button
+              type="button"
+              onClick={handleNuevoPrograma}
+              className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400"
+            >
+              + Publicar programa
+            </button>
+          </RequireRole>
         </header>
 
         <div
@@ -89,8 +147,8 @@ export default function OfertaPage() {
             const activo = filtroTipo === valor;
             const cantidad =
               valor === "todas"
-                ? programasOferta.length
-                : programasOferta.filter((p) => p.tipo === valor).length;
+                ? lista.length
+                : lista.filter((p) => p.tipo === valor).length;
 
             return (
               <button
@@ -215,11 +273,23 @@ export default function OfertaPage() {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
             {programas.map((programa) => (
-              <ProgramaOfertaCard key={programa.id} programa={programa} />
+              <ProgramaOfertaCard
+                key={programa.id}
+                programa={programa}
+                onEditar={puedePublicar ? handleEditarPrograma : undefined}
+              />
             ))}
           </div>
         )}
       </main>
+
+      {formularioAbierto && (
+        <FormularioProgramaOferta
+          programa={programaEditando ?? undefined}
+          onGuardar={handleGuardarPrograma}
+          onCancelar={handleCancelarFormulario}
+        />
+      )}
     </div>
   );
 }
