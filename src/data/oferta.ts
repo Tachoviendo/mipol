@@ -31,7 +31,16 @@ export type ProgramaOferta = {
   area: AreaOferta;
   modalidad: ModalidadOferta;
   turno: TurnoOferta;
+  /** Fecha límite de inscripción (ISO). Si falta, la inscripción está abierta. */
+  fechaLimiteInscripcion?: string;
+  /** Comunicado oficial vinculado (`anuncios.id`). */
+  comunicadoId?: string;
 };
+
+export type EstadoInscripcion = "abierta" | "cierra-pronto" | "cerrada";
+
+/** Días antes de la fecha límite para considerar que "cierra pronto". */
+export const DIAS_CIERRA_PRONTO = 14;
 
 // ─── Etiquetas para la UI (OE-05) ─────────────────────────────────────────────
 
@@ -89,6 +98,7 @@ export const programasOferta: ProgramaOferta[] = [
     area: "informatica",
     modalidad: "presencial",
     turno: "nocturno",
+    fechaLimiteInscripcion: "2026-10-15",
   },
   {
     id: "oe-02",
@@ -103,6 +113,7 @@ export const programasOferta: ProgramaOferta[] = [
     area: "formacion-laboral",
     modalidad: "hibrida",
     turno: "vespertino",
+    fechaLimiteInscripcion: "2026-09-20",
   },
   {
     id: "oe-03",
@@ -117,6 +128,7 @@ export const programasOferta: ProgramaOferta[] = [
     area: "arte",
     modalidad: "presencial",
     turno: "vespertino",
+    fechaLimiteInscripcion: "2026-08-30",
   },
   {
     id: "oe-04",
@@ -196,6 +208,24 @@ export function buscarProgramas(
       coincideTurno
     );
   });
+}
+
+// ─── Estado de inscripción (OE-08) ───────────────────────────────────────────
+
+export function estadoInscripcion(
+  programa: ProgramaOferta,
+  hoy: Date = new Date()
+): EstadoInscripcion {
+  if (!programa.fechaLimiteInscripcion) return "abierta";
+
+  const limiteMs = new Date(programa.fechaLimiteInscripcion + "T23:59:59").getTime();
+  const hoyMs = hoy.getTime();
+
+  if (limiteMs < hoyMs) return "cerrada";
+  if (limiteMs - hoyMs <= DIAS_CIERRA_PRONTO * 24 * 60 * 60 * 1000) {
+    return "cierra-pronto";
+  }
+  return "abierta";
 }
 
 // ─── Alta / edición (OE-07) ──────────────────────────────────────────────────

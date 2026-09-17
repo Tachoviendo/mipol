@@ -17,6 +17,9 @@ import type {
   TipoOferta,
   TurnoOferta,
 } from "@/data/oferta";
+import { anuncios, crearAnuncio } from "@/data/ejemplo";
+
+const OPCION_NUEVO_COMUNICADO = "__nuevo__";
 
 type FormularioProgramaOfertaProps = {
   programa?: ProgramaOferta;
@@ -43,6 +46,12 @@ export function FormularioProgramaOferta({
     programa?.modalidad ?? "presencial"
   );
   const [turno, setTurno] = useState<TurnoOferta>(programa?.turno ?? "matutino");
+  const [fechaLimiteInscripcion, setFechaLimiteInscripcion] = useState(
+    programa?.fechaLimiteInscripcion ?? ""
+  );
+  const [comunicadoId, setComunicadoId] = useState(programa?.comunicadoId ?? "");
+  const [comunicadoTitulo, setComunicadoTitulo] = useState("");
+  const [comunicadoDescripcion, setComunicadoDescripcion] = useState("");
 
   const [error, setError] = useState<string | null>(null);
 
@@ -59,6 +68,23 @@ export function FormularioProgramaOferta({
       return;
     }
 
+    let comunicadoFinalId = comunicadoId;
+    if (comunicadoId === OPCION_NUEVO_COMUNICADO) {
+      if (!comunicadoTitulo.trim()) {
+        setError("Escribí un título para el comunicado oficial.");
+        return;
+      }
+      const nuevoComunicado = crearAnuncio({
+        titulo: comunicadoTitulo.trim(),
+        descripcion:
+          comunicadoDescripcion.trim() ||
+          `Nueva inscripción abierta: ${nombre.trim()}.`,
+        fecha: new Date().toISOString().slice(0, 10),
+        destacado: true,
+      });
+      comunicadoFinalId = nuevoComunicado.id;
+    }
+
     const nuevoPrograma: ProgramaOferta = {
       id: programa?.id ?? "",
       nombre: nombre.trim(),
@@ -71,6 +97,8 @@ export function FormularioProgramaOferta({
       area,
       modalidad,
       turno,
+      fechaLimiteInscripcion: fechaLimiteInscripcion || undefined,
+      comunicadoId: comunicadoFinalId || undefined,
     };
 
     onGuardar(nuevoPrograma);
@@ -266,6 +294,82 @@ export function FormularioProgramaOferta({
               placeholder="Ej: Secretaría del liceo · tel. 4732 1000"
             />
           </div>
+
+          <div>
+            <label htmlFor="fechaLimiteInscripcion" className={etiquetaClases}>
+              Fecha límite de inscripción
+            </label>
+            <input
+              id="fechaLimiteInscripcion"
+              type="date"
+              value={fechaLimiteInscripcion}
+              onChange={(e) => setFechaLimiteInscripcion(e.target.value)}
+              className={campoClases}
+            />
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              Si no la definís, el programa figura como inscripción abierta.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="comunicado" className={etiquetaClases}>
+              Comunicado oficial
+            </label>
+            <select
+              id="comunicado"
+              value={comunicadoId}
+              onChange={(e) => setComunicadoId(e.target.value)}
+              className={campoClases}
+            >
+              <option value="">Sin comunicado vinculado</option>
+              {anuncios.map((anuncio) => (
+                <option key={anuncio.id} value={anuncio.id}>
+                  {anuncio.titulo}
+                </option>
+              ))}
+              <option value={OPCION_NUEVO_COMUNICADO}>
+                + Crear comunicado nuevo
+              </option>
+            </select>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              Difundí la apertura de inscripción al resto de la comunidad.
+            </p>
+          </div>
+
+          {comunicadoId === OPCION_NUEVO_COMUNICADO && (
+            <div className="flex flex-col gap-4 rounded-lg border border-brand-200 bg-brand-50 p-4 dark:border-brand-800 dark:bg-brand-950/30">
+              <div>
+                <label htmlFor="comunicadoTitulo" className={etiquetaClases}>
+                  Título del comunicado *
+                </label>
+                <input
+                  id="comunicadoTitulo"
+                  type="text"
+                  value={comunicadoTitulo}
+                  onChange={(e) => setComunicadoTitulo(e.target.value)}
+                  className={campoClases}
+                  placeholder="Ej: Inscripciones abiertas 2026"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="comunicadoDescripcion"
+                  className={etiquetaClases}
+                >
+                  Descripción del comunicado
+                </label>
+                <textarea
+                  id="comunicadoDescripcion"
+                  rows={2}
+                  value={comunicadoDescripcion}
+                  onChange={(e) => setComunicadoDescripcion(e.target.value)}
+                  className={campoClases}
+                  placeholder="Detalle de la novedad para la comunidad"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="mt-6 flex justify-end gap-3">

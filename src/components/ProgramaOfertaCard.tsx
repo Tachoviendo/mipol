@@ -1,10 +1,13 @@
 import Link from "next/link";
+
 import {
   ETIQUETAS_AREA,
   ETIQUETAS_MODALIDAD,
   ETIQUETAS_TURNO,
 } from "@/data/oferta";
 import type { ProgramaOferta } from "@/data/oferta";
+import { EtiquetaInscripcion } from "@/components/EtiquetaInscripcion";
+import { formatearFecha } from "@/lib/date";
 
 /**
  * `src/components/ProgramaOfertaCard.tsx`: tarjeta de un programa/cursos
@@ -25,15 +28,18 @@ export function ProgramaOfertaCard({
         <h2 className="text-lg font-semibold leading-snug text-zinc-950 dark:text-zinc-50">
           {programa.nombre}
         </h2>
-        <span
-          className={`flex-shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${
-            esTerciaria
-              ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
-              : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
-          }`}
-        >
-          {esTerciaria ? "Oferta terciaria" : "Oferta interna"}
-        </span>
+        <div className="flex flex-shrink-0 flex-col items-end gap-1.5">
+          <span
+            className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+              esTerciaria
+                ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+            }`}
+          >
+            {esTerciaria ? "Oferta terciaria" : "Oferta interna"}
+          </span>
+          <EtiquetaInscripcion programa={programa} />
+        </div>
       </div>
 
       <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
@@ -61,6 +67,14 @@ export function ProgramaOfertaCard({
           <dt className="text-zinc-500 dark:text-zinc-400">Cupos</dt>
           <dd>{programa.cupos > 0 ? programa.cupos : "Ilimitados"}</dd>
         </div>
+        {programa.fechaLimiteInscripcion && (
+          <div className="flex items-center justify-between gap-2">
+            <dt className="text-zinc-500 dark:text-zinc-400">
+              Cierre de inscripción
+            </dt>
+            <dd>{formatearFecha(programa.fechaLimiteInscripcion)}</dd>
+          </div>
+        )}
       </dl>
 
       <Link
