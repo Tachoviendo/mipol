@@ -1,4 +1,9 @@
 import Link from "next/link";
+import {
+  ETIQUETAS_AREA,
+  ETIQUETAS_MODALIDAD,
+  ETIQUETAS_TURNO,
+} from "@/data/oferta";
 import type { ProgramaOferta } from "@/data/oferta";
 
 /**
@@ -28,6 +33,18 @@ export function ProgramaOfertaCard({ programa }: { programa: ProgramaOferta }) {
       <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
         {programa.descripcion}
       </p>
+
+      <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
+        <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-600 dark:bg-white/[.08] dark:text-zinc-300">
+          {ETIQUETAS_AREA[programa.area]}
+        </span>
+        <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-600 dark:bg-white/[.08] dark:text-zinc-300">
+          {ETIQUETAS_MODALIDAD[programa.modalidad]}
+        </span>
+        <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-600 dark:bg-white/[.08] dark:text-zinc-300">
+          {ETIQUETAS_TURNO[programa.turno]}
+        </span>
+      </div>
 
       <dl className="mt-4 space-y-1 text-sm text-zinc-700 dark:text-zinc-300">
         <div className="flex items-center justify-between gap-2">
